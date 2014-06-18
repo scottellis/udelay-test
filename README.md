@@ -1,11 +1,10 @@
-  udelay-test
-=============
+## udelay-test
 
-Overview
--------
+### Overview
 
 A linux module to find the practical resolution of the Linux udelay() 
-function on an OMAP3 Gumstix board.
+function on an OMAP3 Gumstix board. Should work for other boards,
+but I haven't tried it.
 
 The test requires an oscope to do the measurements. 
 
@@ -13,8 +12,7 @@ I used a convenient pin on the Gumstix Overo Tobi expansion header, pin 19.
 This pin shouldn't require any mux'ing on a default kernel.
 
 
-Build
--------
+### Build
 
 There is a file you can source to set up the environment for building using
 the Yocto built tools configured.
@@ -22,12 +20,12 @@ the Yocto built tools configured.
     $ git clone git://github.com/scottellis/udelay-test.git
     $ cd udelay-test
     $ export OETMP=<TMPDIR-from-your-local.conf>
+    $ MACHINE=<overo or duovero>
     $ source yocto-env.sh
     $ make
  
 
-Run
--------
+### Run
  
 Copy the udelay.ko module to the board, insert it.
 
