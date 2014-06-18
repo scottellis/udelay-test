@@ -11,6 +11,13 @@ The test requires an oscope to do the measurements.
 I used a convenient pin on the Gumstix Overo Tobi expansion header, pin 19.
 This pin shouldn't require any mux'ing on a default kernel.
 
+### Customization
+
+The `udelay.c` code toggles `GPIO_170` which is easily accessible on the
+Gumstix expansion boards and by default is already mux'd as gpio.
+
+If you are building for a different machine, you'll want to modify this
+and make sure the pin is mux'd before loading this module.
 
 ### Build
 
@@ -20,7 +27,7 @@ the Yocto built tools configured.
     $ git clone git://github.com/scottellis/udelay-test.git
     $ cd udelay-test
     $ export OETMP=<TMPDIR-from-your-local.conf>
-    $ MACHINE=<overo or duovero>
+    $ export MACHINE=<overo or duovero or whatever>
     $ source yocto-env.sh
     $ make
  
