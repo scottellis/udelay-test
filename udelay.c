@@ -13,8 +13,16 @@
 #include <linux/gpio.h>
 #include <linux/delay.h>
 
-/* this is pin 19 on the TOBI/SUMMIT Gumstix expansion boards */
+// Pin 19 on the Overo Tobi/Summit expansion board header
+// Normally muxed as gpio
 #define TOGGLE_PIN 170
+
+// Pin 9 on the the Duovero Parlor expansion board header 
+// Not normally muxed as gpio
+// You can mux it from the command line like this
+//    root@duovero:~# echo 3 > /sys/kernel/debug/omap_mux/hdq_sio
+// 
+//#define TOGGLE_PIN 127
 
 struct udelay_dev {
 	dev_t devt;

@@ -3,26 +3,37 @@
 ### Overview
 
 A linux module to find the practical resolution of the Linux udelay() 
-function on an OMAP3 Gumstix board. Should work for other boards,
-but I haven't tried it.
+function on the Gumstix Overo and Duovero boards. Should work for other
+boards, but you'll have to find a gpio pin.
 
 The test requires an oscope to do the measurements. 
 
-I used a convenient pin on the Gumstix Overo Tobi expansion header, pin 19.
-This pin shouldn't require any mux'ing on a default kernel.
+For a Duovero, uncomment the appropriate section in `udelay.c` to use
+pin 9 of the Parlor board header.
 
 ### Customization
 
 The `udelay.c` code toggles `GPIO_170` which is easily accessible on the
 Gumstix expansion boards and by default is already mux'd as gpio.
 
-If you are building for a different machine, you'll want to modify this
-and make sure the pin is mux'd before loading this module.
+For a Duovero, uncomment the appropriate section in `udelay.c` to use
+`GPIO_127` pin 9 of the Parlor board header. You'll probably have to
+mux the pin as gpio. By default it's setup for `one-wire` use.
+
+One way is like this
+
+    root@duovero:~# echo 3 > /sys/kernel/debug/omap_mux/hdq_sio
+
+
+If you are building for a different machine, you'll have to choose
+another gpio pin and mux it similarly.
 
 ### Build
 
 There is a file you can source to set up the environment for building using
 the Yocto built tools configured.
+
+Modify `yocto-env.sh` appropriately for your build environment.
 
     $ git clone git://github.com/scottellis/udelay-test.git
     $ cd udelay-test
